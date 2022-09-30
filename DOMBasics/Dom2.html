@@ -63,10 +63,9 @@
             }
 
             var clickBox = document.querySelectorAll('.box');
-            console.log(clickBox);
             for (var i = 0; i < clickBox.length; i++) {
                 clickBox[i].addEventListener('click', function handleClick(event){
-                    event.target.remove();     
+                    event.currentTarget.remove();     
                 })
             }
         })
