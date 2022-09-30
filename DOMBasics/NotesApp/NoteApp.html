@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            margin-top:50px;
+        }
+
+        ul {
+            list-style: none;
+            width:370px;
+        }
+
+        ul li{
+            width: 100%;
+            cursor: pointer;
+            margin: 10px 0;
+            padding: 10px 10px;
+            line-height: 10px;
+            border:1px solid black;
+            border-radius: 5px;
+            position : relative;
+        }
+
+        ul li span{
+            position : absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            background-color: red;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Notes App</h1>
+    <h2>Take Note and Never Forget</h2>
+    <div class="inPut">
+        <input type="text" class="title">
+        <input type="text" class="content">
+        <button class="btn">Add to Do</button>
+    </div>
+
+    <div class="container">
+        <ul>
+
+        </ul>
+    </div>
+
+    <script>
+        var title = document.querySelector('.title')
+        var content = document.querySelector('.content')
+        var clickBtn = document.querySelector('.btn')
+        clickBtn.addEventListener('click',()=>{
+            //tao new notes
+            var newNote = document.createElement('li')
+            newNote.innerHTML=content.value;
+
+            //them note vao list
+            var myList = document.querySelector('ul')
+            myList.appendChild(newNote);
+
+            //tao heading
+            var newTitle = document.createElement('h2')
+            newTitle.innerHTML=title.value;
+            newNote.prepend(newTitle);
+            
+            //tao nut delete
+            var mySpan = document.createElement('span')
+            mySpan.innerHTML='X'
+            newNote.appendChild(mySpan)
+
+            const listSpan = document.querySelectorAll('span')
+            console.log(listSpan)
+            for (var i = 0; i < listSpan.length; i++) {
+                listSpan[i].addEventListener('click', function handleClick(e) {
+                    e.currentTarget.parentElement.remove();
+            })}
+
+            title.value=""
+            content.value=""
+        })
+   
+    </script>
+</body>
+</html>
