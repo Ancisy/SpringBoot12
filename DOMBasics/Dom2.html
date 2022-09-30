@@ -63,10 +63,17 @@
             }
 
             var clickBox = document.querySelectorAll('.box');
+            console.log(clickBox);
+            var points = document.querySelector('.points');  
+            points.innerHTML=clickBox.length;
             for (var i = 0; i < clickBox.length; i++) {
+                var sum = clickBox.length;
                 clickBox[i].addEventListener('click', function handleClick(event){
-                    event.currentTarget.remove();     
+                    event.currentTarget.remove();
+                    var sum = document.querySelectorAll('.box');
+                    points.innerHTML=sum.length;   
                 })
+                
             }
         })
     </script>
