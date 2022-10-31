@@ -1,11 +1,14 @@
 import UserEdit from './features/user/UserEdit';
-import UserList from './features/user/UserList';
 import UserAdd from './features/user/UserAdd';
+import { Route, Routes,BrowserRouter } from "react-router-dom"
 function App() {
   return (
-    <div className="App">
-      <UserEdit/>
-    </div>
+    <>
+      <Routes>
+        <Route path="/add" element={<UserAdd />}/>
+        <Route path="/" element={<UserEdit />}/>
+      </Routes>
+    </>
   );
 }
 

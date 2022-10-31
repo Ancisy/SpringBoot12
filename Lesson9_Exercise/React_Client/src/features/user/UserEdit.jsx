@@ -7,9 +7,9 @@ import UserAdd from './UserAdd';
 function UserEdit() {
 
     const [users, setUser] = useState([]);
-    const [term,setTerm] = useState("");
+    const [term, setTerm] = useState("");
 
-    const [SearchUser,setSearchUser] = useState([]);
+    const [SearchUser, setSearchUser] = useState([]);
 
     useEffect(() => {
         const fetchusers = async () => {
@@ -27,10 +27,10 @@ function UserEdit() {
         fetchusers();
     }, []);
 
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         handleSearch();
-    },[SearchUser,users])
+    }, [users])
 
 
     const handleDeleteUser = async (id) => {
@@ -44,8 +44,8 @@ function UserEdit() {
         }
     }
 
-    const handleSearch = () =>{
-        if(!term){
+    const handleSearch = () => {
+        if (!term) {
             setSearchUser(users);
             return;
         }
@@ -60,17 +60,18 @@ function UserEdit() {
 
     return (
         <div className="container mt-5 mb-5">
-            
+             
+
             <h2 className="text-center text-uppercase">Danh sách user</h2>
 
             <div className="row justify-content-center">
                 <div className="col-md-10">
 
                     <div className="d-flex justify-content-between align-items-center mt-5 mb-4">
-                        <a  className="btn btn-warning" >Tạo user</a>
-                        <input type="text" id="search" className="form-control w-50" placeholder="Tìm kiếm user" onChange={(e)=>{
+                        <a href="/add" className="btn btn-warning" >Tạo user</a>
+                        <input type="text" id="search" className="form-control w-50" placeholder="Tìm kiếm user" onChange={(e) => {
                             setTerm(e.currentTarget.value);
-                        }}/>
+                        }} />
                         <button onClick={handleSearch}>Search</button>
                     </div>
 
@@ -106,12 +107,17 @@ function UserEdit() {
                                 }
                             </tbody>
                         </table>
-
                         <p className="message d-none"></p>
                     </div>
                 </div>
+
+                
             </div>
+
+         
         </div>
+
+        
     )
 }
 

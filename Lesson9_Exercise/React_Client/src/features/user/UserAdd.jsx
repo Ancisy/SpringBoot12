@@ -50,11 +50,6 @@ function UserAdd() {
         }
     };
 
-   
-
-
-
-
     return (
         <div className="container mt-5 mb-5">
             <h2 className="text-center text-uppercase mb-3">Tạo user</h2>
