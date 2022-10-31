@@ -1,124 +1,91 @@
-import axios from 'axios';
 import React from 'react'
 import { useState, useEffect } from 'react';
-import userApi from "../../api/userApi"
-import UserAdd from './UserAdd';
 
-function UserEdit() {
+function UserList(props) {
+   console.log(props)
 
-    const [users, setUser] = useState([]);
-    const [term, setTerm] = useState("");
+  return (
+    <div className="container mt-5 mb-5">
+    <h2 className="text-center text-uppercase mb-3">Thông tin user</h2>
 
-    const [SearchUser, setSearchUser] = useState([]);
-
-    useEffect(() => {
-        const fetchusers = async () => {
-            try {
-                let res = await axios.get(
-                    "http://localhost:8080/api/v1/user"
-                );
-                console.log(res)
-                setUser(res.data);
-                setSearchUser(res.data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchusers();
-    }, []);
-
-
-    useEffect(() => {
-        handleSearch();
-    }, [users])
-
-
-    const handleDeleteUser = async (id) => {
-        try {
-            await userApi.deleteUser(id);
-            const newUser = users.filter((user) => user.id !== id);
-            setUser(newUser);
-            setSearchUser(newUser);
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    const handleSearch = () => {
-        if (!term) {
-            setSearchUser(users);
-            return;
-        }
-        const SearchUser = users.filter(
-            (user) => user.name.toLowerCase().includes(term.toLowerCase())
-        );
-        console.log(SearchUser)
-        setSearchUser(SearchUser);
-        return SearchUser;
-    }
-
-
-    return (
-        <div className="container mt-5 mb-5">
-             
-
-            <h2 className="text-center text-uppercase">Danh sách user</h2>
-
-            <div className="row justify-content-center">
-                <div className="col-md-10">
-
-                    <div className="d-flex justify-content-between align-items-center mt-5 mb-4">
-                        <a href="/add" className="btn btn-warning" >Tạo user</a>
-                        <input type="text" id="search" className="form-control w-50" placeholder="Tìm kiếm user" onChange={(e) => {
-                            setTerm(e.currentTarget.value);
-                        }} />
-                        <button onClick={handleSearch}>Search</button>
+    <div className="row justify-content-center">
+        <div className="col-md-6">
+            <div className="bg-light p-4">
+                <div className="mb-3">
+                    <label className="col-form-label">Name</label>
+                    <input type="text" id="name" className="form-control" />
+                </div>
+                <div className="mb-3">
+                    <label className="col-form-label">Email</label>
+                    <input type="text" id="email" className="form-control" />
+                </div>
+                <div className="mb-3">
+                    <label className="col-form-label">Phone</label>
+                    <input type="text" id="phone" className="form-control" />
+                </div>
+                <div className="mb-3">
+                    <label className="col-form-label">Address</label>
+                    <select className="form-select" id="address">
+                        
+                    </select>
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Avatar</label>
+                    <div className="avatar-preview mb-3 rounded">
+                        <img src="" alt="avatar" id="avatar-preview" className="rounded"/>
                     </div>
 
-                    <div className="bg-light p-4">
-                        <table className="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-
-                                {
-                                    SearchUser.map((user) => (
-                                        <tr key={user.id}>
-                                            <td>{user.id}</td>
-                                            <td>{user.name}</td>
-                                            <td>{user.email}</td>
-                                            <td>{user.phone}</td>
-                                            <td>{user.address}</td>
-                                            <td>
-                                                <a href={users.avatar} className="btn btn-success">Xem chi tiết</a>
-                                                <button className="btn btn-danger" onClick={() => handleDeleteUser(user.id)}>Xóa</button>
-                                            </td>
-                                        </tr>
-                                    ))
-                                }
-                            </tbody>
-                        </table>
-                        <p className="message d-none"></p>
+                    <label htmlFor="avatar" className="btn btn-warning">Đổi avatar</label>
+                    <input type="file" id="avatar" className="d-none"/>
+                  </div>
+                <div className="mb-3">
+                    <label className="col-form-label">Password</label>
+                    <div className="">
+                        <button type="button" className="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#modal-change-password">
+                            Đổi mật khẩu
+                        </button>
+                        <button className="btn btn-warning" id="btn-forgot-password">
+                            Quên mật khẩu
+                        </button>
                     </div>
                 </div>
-
-                
             </div>
-
-         
+            <div className="text-center mt-3">
+                <button className="btn btn-secondary btn-back">Quay lại</button>
+                <button className="btn btn-success" id="btn-save">Cập nhật</button>
+            </div>
         </div>
+    </div>
 
-        
-    )
+    {/* <!-- Modal đổi mật khẩu--> */}
+    <div className="modal fade" id="modal-change-password" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div className="modal-dialog">
+            <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title" id="staticBackdropLabel">Đổi mật khẩu</h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                    <div className="mb-3">
+                        <label className="col-form-label">Mật khẩu cũ</label>
+                        <input type="text" id="old-password" className="form-control" />
+                    </div>
+                    <div className="mb-3">
+                        <label className="col-form-label">Mật khẩu mới</label>
+                        <input type="text" id="new-password" className="form-control" />
+                    </div>
+                </div>
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" className="btn btn-primary" id="btn-change-password">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  )
 }
 
-export default UserEdit
+export default UserList

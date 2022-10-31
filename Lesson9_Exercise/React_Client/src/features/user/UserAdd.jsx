@@ -2,6 +2,10 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import userApi from '../../api/userApi';
 import axios from 'axios';
+import { redirect, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function UserAdd() {
     const [name, setName] = useState("");
@@ -12,6 +16,7 @@ function UserAdd() {
 
     const [selectedAddr,setSelectedAddr] = useState("");
     const [term,setTerm] = useState([]);
+    const naviagate = useNavigate();
 
     useEffect(() => {
         const fetchProvince = async () => {
@@ -29,7 +34,7 @@ function UserAdd() {
     },[])
 
     const handleAddUser = async (name, email, phone,address,password) => {
-
+        
         try {
             console.log("parent : ", name, email, phone,address,password)
             let newUser = {
@@ -45,6 +50,14 @@ function UserAdd() {
             setPassword("")
             //Gọi API createUser phía server
             let res = await userApi.createUser(newUser);
+            
+            
+
+            toast.success("Thanh Cong")
+             setTimeout(()=>{
+             naviagate("/list");
+              },2000);
+
         } catch (e) {
             alert(e.response.data.message);
         }
@@ -53,7 +66,7 @@ function UserAdd() {
     return (
         <div className="container mt-5 mb-5">
             <h2 className="text-center text-uppercase mb-3">Tạo user</h2>
-
+            <ToastContainer/>
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <div className="bg-light p-4">

@@ -1,13 +1,20 @@
 import UserEdit from './features/user/UserEdit';
 import UserAdd from './features/user/UserAdd';
-import { Route, Routes,BrowserRouter } from "react-router-dom"
+import UserList from './features/user/UserList';
+import { Route, Routes} from "react-router-dom"
+import Header from './features/components/header.jsx';
+
 function App() {
   return (
     <>
-      <Routes>
+    <Header/>
+    <Routes >
         <Route path="/add" element={<UserAdd />}/>
-        <Route path="/" element={<UserEdit />}/>
+        <Route path="/edit" element={<UserEdit />}/>
+        <Route path="/list" element={<UserList/>}/>
       </Routes>
+
+    {/* <Footer/> */}
     </>
   );
 }
