@@ -103,7 +103,7 @@ function UserAdd() {
                         </div>
                     </div>
                     <div className="text-center mt-3">
-                        <button className="btn btn-secondary btn-back">Quay lại</button>
+                        <a href="/" className="btn btn-secondary btn-back">Quay lại</a>
                         <button className="btn btn-success" id="btn-save" onClick={(e)=>handleAddUser(name,email,phone,selectedAddr,password)}>Tạo User</button>
                     </div>
                 </div>
