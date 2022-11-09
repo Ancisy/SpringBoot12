@@ -35,8 +35,6 @@ public class User {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "address_id")
     private Address address;
-
-
     @PrePersist
     public void prePersist() {
         this.address.setDiachi("null");

@@ -1,6 +1,8 @@
 package com.example.spring_security_login;
 
+import com.example.spring_security_login.entity.Address;
 import com.example.spring_security_login.entity.User;
+import com.example.spring_security_login.repository.AddressRepository;
 import com.example.spring_security_login.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,24 @@ class SpringSecurityLoginApplicationTests {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AddressRepository addressRepository;
+
+
+    @Test
+    @Rollback(value = false)
+    void data_address() {
+        Address address = Address.builder()
+                .diachi("Hai Phong").build();
+
+
+        Address address1 = Address.builder()
+                .diachi("Phu Yen").build();
+
+        Address address2 = Address.builder()
+                .diachi("Ho Chi Minh").build();
+        addressRepository.saveAll(List.of(address1,address));
+    }
 
     @Test
     @Rollback(value = false)

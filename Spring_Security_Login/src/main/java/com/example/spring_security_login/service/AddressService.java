@@ -3,20 +3,20 @@ package com.example.spring_security_login.service;
 import com.example.spring_security_login.entity.Address;
 import com.example.spring_security_login.entity.User;
 import com.example.spring_security_login.repository.AddressRepository;
-import com.example.spring_security_login.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserService {
+public class AddressService {
     @Autowired
-    private UserRepository userRepository;
+    private AddressRepository addressRepository;
 
-    public List<User> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users;
+    public List<Address> getAllAddress(){
+        List<Address> addresses = addressRepository.findAll();
+        return addresses;
     }
+
 
 }
